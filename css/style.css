@@ -130,6 +130,7 @@ body {
   -webkit-opacity: 0.85;
   -moz-opacity: 0.85;
   opacity: 0.85;
+  pointer-events:none;
 }
 .bg-color-overlay ::selection {
   background: #fff;
@@ -1869,7 +1870,7 @@ fieldset[disabled] .btn.ribbon.active {
   top: -32px;
   left: -88px;
   font-family: 'Dancing Script', cursive;
-  font-size: 50pt;
+  font-size: 33pt;
   color: #fff;
   z-index: 1;
   padding: 60px 30px;
@@ -1943,6 +1944,13 @@ fieldset[disabled] .btn.ribbon.active {
   text-align: center;
   color: #fff;
   font-family: 'Dancing Script', cursive;
+}
+.texto-sobrevioleta {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10pt;
+  line-height: 20px;
+  color: #000;
+  text-align: center;
 }
 /* #Timeline
 ================================================== */
