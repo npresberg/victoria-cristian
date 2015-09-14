@@ -2,15 +2,15 @@
 var map_markers = [
 	{
 		"title": "Reception",
-		"latitude":33.775664,
-		"longitude":-118.065090,
+		"latitude":-38.6213045,
+		"longitude":-68.3123759,
 		"icon":"fa-glass", //Check the full list of icons at http://fortawesome.github.io/Font-Awesome/icons/
-		"infoWindow":"Old Ranch Country Club <br> 29033 West Lake Drive, Agoura Hills, CA"
+		"infoWindow":"BODEGA SAURUS El Chañar, Neuquén."
 	},
 	{
 		"title": "Accommodation 1",
-		"latitude":33.777929,
-		"longitude":-118.076891,
+		"latitude":33.780428,
+		"longitude":-118.084075,
 		"icon":"fa-bed", //Check the full list of icons at http://fortawesome.github.io/Font-Awesome/icons/
 		"infoWindow":"Accommodation 1 <br> Rossmoor, CA 90720"
 	},
