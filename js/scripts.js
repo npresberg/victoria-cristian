@@ -809,7 +809,7 @@ var Lilac;
                     
                     var params = [];
                     for (var key in data) {
-                        params.push(key + '=' + encodeURIComponent(data[key]));
+                        params.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
                     }
 
                     showError = function () {
