@@ -204,6 +204,10 @@ var Lilac;
                         window.open(navActive.attr('href'), "_self");
                     }
                 });
+                
+                $('a[href="#"]').click(function(e) {
+                    return false;
+                });
 
                 var sticky = new Waypoint.Sticky({
                     element: $('.nav-section')
