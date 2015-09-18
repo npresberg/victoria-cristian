@@ -100,12 +100,12 @@ var Lilac;
                 /**
                  * Get latest tweets
                  */
-                $tis.getLatestTweets();
+                //$tis.getLatestTweets();
 
                 /**
                  * Get Instagram feed
                  */
-                $tis.getInstagram();
+                //$tis.getInstagram();
 
                 /**
                  * Create PrettyPhoto links
@@ -774,7 +774,7 @@ var Lilac;
                 }).resize();
             },
 
-            contactForm: function () {
+             contactForm: function () {
 
                 var $tis = this;
 
@@ -783,61 +783,34 @@ var Lilac;
 
                     var $submit_btn = $(this),
                         $form = $submit_btn.closest("form"),
-                        $fields = $("input, textarea, .radio-lilac", $form),
-                        len = 0,
-                        re = /\S+@\S+\.\S+/,
-                        html = "contact",
-                        error = false,
+                        re = /^\S+@\S+\.\S+$/,
+                        data = {},
+                        error,
                         showError,
                         showSuccess,
                         stopSpin,
                         spinIcon = [];
 
-                    $fields.each(function () {
-                        var $field = $(this);
+                    $form.find('.required[value=""]').addClass('invalid');
+                    
+                    var email = $form.find('[type="email"]');
+                    email.toggleClass('invalid', !re.test(email.val()) );
 
-                        if ($field.attr('type') === "hidden") {
-                            if ($field.hasClass('subject')) {
-                                html += "&subject=" + $field.val();
-                            } else if ($field.hasClass('fromName') || $field.hasClass('fromname')) {
-                                html += "&fromname=" + $field.val();
-                            } else if ($field.hasClass('fromEmail') || $field.hasClass('fromemail')) {
-                                html += "&fromemail=" + $field.val();
-                            } else if ($field.hasClass('emailTo') || $field.hasClass('emailto')) {
-                                html += "&emailto=" + $field.val();
-                            }
-                        } else {
-                            if ($field.hasClass('required') && $field.val() === "") {
-                                $field.addClass('invalid');
-                                error = true;
-                            } else if ($field.attr('type') === "email" && $field.val() !== "" && re.test($field.val()) === false) {
-                                $field.addClass('invalid');
-                                error = true;
-                            } else if ($field.attr('id') !== "recaptcha_response_field") {
-                                $field.removeClass('invalid');
-                                if ($field.hasClass('subject')) {
-                                    html += "&subject=" + $field.val();
-                                    html += "&subject_label=" + $field.attr("name");
-                                } else if ($field.hasClass('fromName') || $field.hasClass('fromname')) {
-                                    html += "&fromname=" + $field.val();
-                                    html += "&fromname_label=" + $field.attr("name");
-                                } else if ($field.hasClass('fromEmail') || $field.hasClass('fromemail')) {
-                                    html += "&fromemail=" + $field.val();
-                                    html += "&fromemail_label=" + $field.attr("name");
-                                } else if ($field.hasClass('radio-lilac')) {
-                                    html += "&field" + len + "_label=" + $field.data("value");
-                                    html += "&field" + len + "_value=" + $('.active', $field).data("value");
-                                    len += 1;
-                                } else {
-                                    html += "&field" + len + "_label=" + $field.attr("name");
-                                    html += "&field" + len + "_value=" + $field.val();
-                                    len += 1;
-                                }
-                            }
-                        }
+                    error = $form.find('.invalid').length > 0;
+
+                    $form.find("[name]").each(function () {
+                        data[this.name] = this.value;
                     });
 
-                    html += "&len=" + len;
+                    $form.find('.radio-lilac').each(function() {
+                        var radio = $(this);
+                        data[radio.data('value')] = radio.find('.active').text();
+                    });
+                    
+                    var params = [];
+                    for (var key in data) {
+                        params.push(key + '=' + encodeURIComponent(data[key]));
+                    }
 
                     showError = function () {
                         $submit_btn.width($submit_btn.width());
@@ -904,24 +877,17 @@ var Lilac;
                         $submit_btn.addClass('disabled');
 
                         $.ajax({
-                            type: 'POST',
-                            url: 'contact.php',
-                            data: html,
+                            type: $form.attr('method'),
+                            url: $form.attr('action'),
+                            data: params.join('&'),
                             success: function (msg) {
                                 stopSpin();
-
-                                if (msg === 'ok') {
-                                    showSuccess();
-                                    $form[0].reset();
-                                } else {
-                                    showError();
-                                }
-
+                                showSuccess();
+                                $form[0].reset();
                                 $tis.sendingMail = false;
                             },
                             error: function () {
                                 stopSpin();
-
                                 showError();
                                 $tis.sendingMail = false;
                             }
