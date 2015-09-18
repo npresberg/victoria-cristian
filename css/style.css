@@ -131,6 +131,7 @@ body {
   -moz-opacity: 0.85;
   opacity: 0.85;
   pointer-events:none;
+  z-index:-1;
 }
 .bg-color-overlay ::selection {
   background: #fff;
