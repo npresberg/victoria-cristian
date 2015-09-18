@@ -1949,7 +1949,16 @@ fieldset[disabled] .btn.ribbon.active {
   font-family: 'Open Sans', sans-serif;
   font-size: 10pt;
   line-height: 20px;
-  color: #000;
+  color: #ffffff;
+  text-align: center;
+}
+
+}
+.texto-sobrevioletagrande {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20pt;
+  line-height: 20px;
+  color: #ffffff;
   text-align: center;
 }
 /* #Timeline
