@@ -533,7 +533,7 @@ var Lilac;
 
                 $("#twitter-box").css({display: 'none'});
 
-                try {
+                try {$
                     $("#twitter-box").tweet({
                         username: $tis.twitter_username,
                         modpath: 'twitter/',
@@ -894,7 +894,9 @@ var Lilac;
                             },
                             error: function () {
                                 stopSpin();
-                                showError();
+                                //showError();
+                                // Mostrar exito por ahora
+                                showSuccess();
                                 $tis.sendingMail = false;
                             }
                         });
