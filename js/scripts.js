@@ -867,8 +867,10 @@ var Lilac;
 
                         $submit_btn.removeClass('disabled');
                     };
+                    
+                    if ($tis.sendingMail) return false;
 
-                    if (!error && !$tis.sendingMail) {
+                    if (!error) {
                         $tis.sendingMail = true;
 
                         $('i', $submit_btn).each(function (i) {
